@@ -10,7 +10,7 @@ from layers.mog_layer import *
 from utils.image_utils import *
 
 
-class TestCases():
+class Tests():
 
     def test_deligan_baseline(self, generator_model):
         K.set_learning_phase(False)
@@ -36,7 +36,6 @@ class TestCases():
         image = image * 127.5 + 127.5
         img = Image.fromarray(image.astype(np.uint8))
         img.show()
-
 
     def test_deligan_final(self, generator_model, classifier_model, eeg_pkl_file):
         K.set_learning_phase(False)
@@ -81,8 +80,8 @@ class TestCases():
 
 
 if __name__ == '__main__':
-    testcases = TestCases()
-    testcases.test_deligan_baseline('../models/gan_models/baseline/deligan/image/generator.model')
-    testcases.test_deligan_final('../models/gan_models/final/image/generator.model',
+    tests = Tests()
+    #tests.test_deligan_baseline('../models/gan_models/baseline/deligan/image/generator.model')
+    tests.test_deligan_final('../models/gan_models/final/image/generator.model',
                        '../models/eeg_models/image/run_final.h5',
                        '../data/eeg/image/data.pkl')
