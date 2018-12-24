@@ -14,7 +14,7 @@ from training.models.ac_gan import *
 from utils.image_utils import *
 
 
-def train_gan(dataset, input_noise_dim, batch_size, epochs, splits_save_dir, saved_classifier_model_file, model_save_dir, output_dir, classifier_model_file):
+def train_gan(dataset, input_noise_dim, batch_size, epochs, data_dir, saved_classifier_model_file, model_save_dir, output_dir):
 
     K.set_learning_phase(False)
     # folders containing images used for training
@@ -49,14 +49,12 @@ def train_gan(dataset, input_noise_dim, batch_size, epochs, splits_save_dir, sav
 
     g.summary()
     d.summary()
-    
-    c = load_model(classifier_model_file)
 
-    splits = pickle.load(open(os.path.join(splits_save_dir, 'data_splits.pkl'), "rb"))
+    eeg_data = pickle.load(open(os.path.join(data_dir, 'data.pkl'), "rb"))
     classifier = load_model(saved_classifier_model_file)
     classifier.summary()
-    x_test = splits[b'x_test']
-    y_test = splits[b'y_test']
+    x_test = eeg_data[b'x_test']
+    y_test = eeg_data[b'y_test']
     y_test = [np.argmax(y) for y in y_test]
     layer_index = 9
 
@@ -110,12 +108,8 @@ def train_gan(dataset, input_noise_dim, batch_size, epochs, splits_save_dir, sav
             g_loss = d_on_g.train_on_batch(conditioned_noise, [np.array([1] * batch_size), np.array(one_hot_vectors).reshape(batch_size, num_classes)])
             d.trainable = True
 
-            c_loss, c_accuracy = c.evaluate(generated_images, np.array(one_hot_vectors).reshape(batch_size, 10), batch_size=batch_size, verbose=False)
-
         print("Epoch %d d_loss : %f" % (epoch, d_loss))
         print("Epoch %d g_loss : %f" % (epoch, g_loss[0]))
-        print("Epoch %d c_loss : %f" % (epoch, c_loss))
-        print("Epoch %d c_accuracy : %f" % (epoch, c_accuracy))
 
         # save generator and discriminator models along with the weights
         g.save(os.path.join(model_save_dir, 'generator_' + str(epoch)), overwrite=True, include_optimizer=True)
@@ -126,7 +120,7 @@ def train():
     folder_name_mapping = {0: 'Digit', 1: 'Char'}
     dataset = 1
     batch_size = 100
-    run_id = 2
+    run_id = 1
     epochs = 500
     model_save_dir = os.path.join('./saved_models/baseline_acgan_with_eeg/', folder_name_mapping[dataset], 'run_' + str(run_id))
     if not os.path.exists(model_save_dir):
@@ -136,12 +130,10 @@ def train():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    classifier_model_file = os.path.join('./trained_classifier_models', 'classifier_' + folder_name_mapping[dataset].lower() + '.h5')
-
-    splits_save_dir = os.path.join('./data_splits', folder_name_mapping[dataset].lower(), 'run_1')
+    eeg_data_dir = os.path.join('./data/eeg', folder_name_mapping[dataset].lower())
     eeg_classifier_model_file = os.path.join('../models/eeg_models', folder_name_mapping[dataset].lower(), 'run_final.h5')
 
-    train_gan(dataset=dataset, input_noise_dim=100, batch_size=batch_size, epochs=epochs, splits_save_dir=splits_save_dir, saved_classifier_model_file=eeg_classifier_model_file, model_save_dir=model_save_dir, output_dir=output_dir, classifier_model_file=classifier_model_file)
+    train_gan(dataset=dataset, input_noise_dim=100, batch_size=batch_size, epochs=epochs, data_dir=eeg_data_dir, saved_classifier_model_file=eeg_classifier_model_file, model_save_dir=model_save_dir, output_dir=output_dir)
 
 
 if __name__ == '__main__':
