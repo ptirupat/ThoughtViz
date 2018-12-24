@@ -24,7 +24,7 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 * Download the sample trained GAN models from https://drive.google.com/open?id=1uFFhvTsU2nmdaecR2WPWsiGJfgI3as1_
 * Extract them and place in the models folder (.../ThoughtViz/models/gan_models)
 
-* Run test.py to run the tests 
+* Run test.py to run the sample tests 
 
    1. Baseline Evaluation
 
