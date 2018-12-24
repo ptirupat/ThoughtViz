@@ -24,15 +24,15 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 * Download the sample trained GAN models from https://drive.google.com/open?id=1uFFhvTsU2nmdaecR2WPWsiGJfgI3as1_
 * Extract them and place in the models folder (.../ThoughtViz/models/gan_models)
 
-Run test.py to run the tests 
+* Run test.py to run the tests 
 
-1. Baseline Evaluation
+   1. Baseline Evaluation
 
-   * DeLiGAN : Uses 1-hot class label as conditioning with MoGLayer at the input.
+      * DeLiGAN : Uses 1-hot class label as conditioning with MoGLayer at the input.
 
-2. Final Evaluation
+   2. Final Evaluation
 
-   * Our Approach : Uses EEG encoding from the trained EEG classifier as conditioning. The encoding is used as weights in the MoGLayer
+      * Our Approach : Uses EEG encoding from the trained EEG classifier as conditioning. The encoding is used as weights in the MoGLayer
  
 **NOTE** : Currently we have uploaded only one baseline model and our final model. Other models can be obtained by running the training code. 
 
