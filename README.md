@@ -10,6 +10,8 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 
 * Download the trained EEG Classification and GAN models from https://drive.google.com/open?id=1AYff632-iwtkhGi6jWAiOkt-XLgthfNl 
 * Extract it and place it in the project folder (.../ThoughtViz/models)
+* Download the trained image classifier models used in training from https://drive.google.com/open?id=1U9qtN1SlOS3dzd2BwWWHhJiMz_0yNW9U
+* Extract it and place it in the training folder (.../ThoughtViz/training/trained_classifier_models)
 
 **NOTE** : Currently we have uploaded only one baseline model and our final model. Other baseline models will be updated soon. 
 
