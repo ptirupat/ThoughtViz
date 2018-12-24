@@ -8,12 +8,10 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 
 ## Trained Models
 
-* Download the trained EEG Classification and GAN models from https://drive.google.com/open?id=1AYff632-iwtkhGi6jWAiOkt-XLgthfNl 
-* Extract it and place it in the project folder (.../ThoughtViz/models)
+* Download the trained EEG Classification from https://drive.google.com/open?id=1cq8RTBiwqO-Jo0TZjBNlRHZEhjKDknKP
+* Extract them and place in the models folder (.../ThoughtViz/models/eeg_models)
 * Download the trained image classifier models used in training from https://drive.google.com/open?id=1U9qtN1SlOS3dzd2BwWWHhJiMz_0yNW9U
-* Extract it and place it in the training folder (.../ThoughtViz/training/trained_classifier_models)
-
-**NOTE** : Currently we have uploaded only one baseline model and our final model. Other baseline models will be updated soon. 
+* Extract them and place in the training folder (.../ThoughtViz/training/trained_classifier_models)
 
 ## Training
 
@@ -23,14 +21,20 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 
 ## Testing
 
+* Download the sample trained GAN models from https://drive.google.com/open?id=1uFFhvTsU2nmdaecR2WPWsiGJfgI3as1_
+* Extract them and place in the models folder (.../ThoughtViz/models/gan_models)
+
 Run test.py to run the tests 
 
 1. Baseline Evaluation
 
    * DeLiGAN : Uses 1-hot class label as conditioning with MoGLayer at the input.
 
-
 2. Final Evaluation
 
    * Our Approach : Uses EEG encoding from the trained EEG classifier as conditioning. The encoding is used as weights in the MoGLayer
+ 
+**NOTE** : Currently we have uploaded only one baseline model and our final model. Other models can be obtained by running the training code. 
+
+
 
