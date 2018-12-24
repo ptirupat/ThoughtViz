@@ -130,7 +130,7 @@ def train():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    eeg_data_dir = os.path.join('./data/eeg', folder_name_mapping[dataset].lower())
+    eeg_data_dir = os.path.join('../data/eeg', folder_name_mapping[dataset].lower())
     eeg_classifier_model_file = os.path.join('../models/eeg_models', folder_name_mapping[dataset].lower(), 'run_final.h5')
 
     train_gan(dataset=dataset, input_noise_dim=100, batch_size=batch_size, epochs=epochs, data_dir=eeg_data_dir, saved_classifier_model_file=eeg_classifier_model_file, model_save_dir=model_save_dir, output_dir=output_dir)
