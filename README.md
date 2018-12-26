@@ -6,6 +6,11 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 * Download the EEG data from [here](https://drive.google.com/open?id=1atP9CsjWIT-hg3fX--fcC1hg0uvg9bEH)
 * Extract it and place it in the project folder (.../ThoughtViz/data)
 
+## Image Data
+
+* Downwload the images used to train the models from [here](https://drive.google.com/open?id=1x32IulYeBVmkshEKweijMX3DK1Wu8odx)
+* Extract them and palce it in the images folder (.../ThoughtViz/training/images)
+
 ## Trained Models
 
 * Download the trained EEG Classification from [here](https://drive.google.com/open?id=1cq8RTBiwqO-Jo0TZjBNlRHZEhjKDknKP)
