@@ -13,7 +13,7 @@ Implementation for the paper https://dl.acm.org/citation.cfm?doid=3240508.324064
 
 ## Trained Models
 
-* Download the trained EEG Classification from [here](https://drive.google.com/open?id=1cq8RTBiwqO-Jo0TZjBNlRHZEhjKDknKP)
+* Download the trained EEG Classification models from [here](https://drive.google.com/open?id=1cq8RTBiwqO-Jo0TZjBNlRHZEhjKDknKP)
 * Extract them and place in the models folder (.../ThoughtViz/models/eeg_models)
 * Download the trained image classifier models used in training from [here](https://drive.google.com/open?id=1U9qtN1SlOS3dzd2BwWWHhJiMz_0yNW9U)
 * Extract them and place in the training folder (.../ThoughtViz/training/trained_classifier_models)
