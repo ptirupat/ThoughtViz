@@ -36,11 +36,11 @@ def train_gan(dataset, input_noise_dim, batch_size, epochs, model_save_dir, outp
     d.compile(loss=['binary_crossentropy','categorical_crossentropy'], optimizer=d_optim)
     d.trainable = True
 
-    g = generator_model(input_noise_dim + num_classes)
+    g = generator_model(input_noise_dim, num_classes)
     g_optim = Adam(lr=adam_lr, beta_1=adam_beta_1)
     g.compile(loss='categorical_crossentropy', optimizer=g_optim)
 
-    d_on_g = generator_containing_discriminator(input_noise_dim + num_classes, g, d)
+    d_on_g = generator_containing_discriminator(input_noise_dim, num_classes, g, d)
     d_on_g.compile(loss=['binary_crossentropy','categorical_crossentropy'], optimizer=g_optim)
 
     g.summary()
@@ -59,17 +59,12 @@ def train_gan(dataset, input_noise_dim, batch_size, epochs, model_save_dir, outp
 
             one_hot_vectors = [to_categorical(label, 10) for label in random_labels]
 
-            conditioned_noise = []
-            for i in range(batch_size):
-                conditioned_noise.append(np.append(noise[i], one_hot_vectors[i]))
-            conditioned_noise = np.array(conditioned_noise)
-
             # get real images and corresponding labels
             real_images = x_train[index * batch_size:(index + 1) * batch_size]
             real_labels = y_train[index * batch_size:(index + 1) * batch_size]
 
             # generate fake images using the generator
-            generated_images = g.predict(conditioned_noise, verbose=0)
+            generated_images = g.predict(, verbose=0)
 
             # discriminator loss of real images
             d_loss_real = d.train_on_batch(real_images, [np.array([1] * batch_size), np.array(real_labels)])
@@ -86,7 +81,7 @@ def train_gan(dataset, input_noise_dim, batch_size, epochs, model_save_dir, outp
 
             d.trainable = False
             # generator loss
-            g_loss = d_on_g.train_on_batch(conditioned_noise, [np.array([1] * batch_size), np.array(one_hot_vectors).reshape(batch_size, num_classes)])
+            g_loss = d_on_g.train_on_batch([np.array(noise), np.array(one_hot_vectors)], [np.array([1] * batch_size), np.array(one_hot_vectors).reshape(batch_size, num_classes)])
             d.trainable = True
 
         print("Epoch %d d_loss : %f" % (epoch, d_loss))
